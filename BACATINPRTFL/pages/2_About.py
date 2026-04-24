@@ -58,7 +58,9 @@ achievement_links = [
     "pages/cert3.png.jpg", 
     "pages/cert4.png.jpg"
 ]
-
+# This will print a list of every file the app can see in the current folder
+# It helps you see if 'cert1.png.jpg' is actually there
+st.write("DEBUG - Files detected:", os.listdir("pages/"))
 cols = st.columns(4)
 for i, col in enumerate(cols):
     with col:
