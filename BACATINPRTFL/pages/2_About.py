@@ -48,29 +48,34 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- 3. ACHIEVEMENTS GALLERY ---
 st.markdown("### 🏆 SYSTEM ACHIEVEMENTS")
 
-# Use the full relative path from the root of your GitHub repo
+# This path works on Live Streamlit Cloud and Local VS Code
+# Make sure these 4 files are physically inside your 'pages' folder!
 achievement_links = [
     "pages/cert1.png.jpg", 
     "pages/cert2.png.jpg", 
     "pages/cert3.png.jpg", 
     "pages/cert4.png.jpg"
 ]
-# This will print a list of every file the app can see in the current folder
-# It helps you see if 'cert1.png.jpg' is actually there
-st.write("DEBUG - Files detected:", os.listdir("pages/"))
+
 cols = st.columns(4)
 for i, col in enumerate(cols):
     with col:
-        link = achievement_links[i]
+        # Get the filename for the specific column
+        img_path = achievement_links[i]
         
-        # Check if the file exists using the relative path
-        if os.path.exists(link):
+        # Check if file exists to prevent the app from crashing
+        if os.path.exists(img_path):
             st.markdown('<div class="achievement-card">', unsafe_allow_html=True)
-            st.image(link, caption=f"DATA_LOG_{i+1}", use_container_width=True)
+            st.image(img_path, caption=f"DATA_LOG_{i+1}", use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
         else:
-            # Displays the warning if it still can't find it
-            st.warning(f"FILE NOT FOUND: {link}")
+            # If it's not in /pages, it checks the root folder as a backup
+            backup_path = img_path.replace("pages/", "")
+            if os.path.exists(backup_path):
+                st.markdown('<div class="achievement-card">', unsafe_allow_html=True)
+                st.image(backup_path, caption=f"DATA_LOG_{i+1}", use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+            else:
+                st.warning(f"FILE NOT FOUND: {img_path}")
