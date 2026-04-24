@@ -51,12 +51,12 @@ st.markdown("""
 # --- 3. ACHIEVEMENTS GALLERY ---
 st.markdown("### 🏆 SYSTEM ACHIEVEMENTS")
 
-# Use ../ to point to the root directory and match the actual .png.jpg extension
+# Use the full relative path from the root of your GitHub repo
 achievement_links = [
-    "cert1.png.jpg", 
-    "cert2.png.jpg", 
-    "cert3.png.jpg", 
-    "cert4.png.jpg"
+    "pages/cert1.png.jpg", 
+    "pages/cert2.png.jpg", 
+    "pages/cert3.png.jpg", 
+    "pages/cert4.png.jpg"
 ]
 
 cols = st.columns(4)
